@@ -1,0 +1,11 @@
+.character-flex {
+    display: flex;
+    flex-wrap: wrap;   
+}
+
+@media(max-width: 800px){
+   .character-flex {
+       margin-left: 2rem;
+   }
+}
+

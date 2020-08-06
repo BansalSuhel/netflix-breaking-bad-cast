@@ -1,0 +1,17 @@
+.form-control {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.form-control__input {
+  width: 60%;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: .7rem;
+  border: none;
+}
+
+.form-control__input:hover {
+    outline: none;
+    border: none;
+}

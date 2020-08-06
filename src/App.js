@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import Header from './components/UI/Header';
+import CharacterFlex from './components/CharacterFlex';
+import SearchBox from './components/UI/SearchBox';
+import Spinner from './components/UI/Spinner';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [items, setItems] = useState([]);
+  const [query, setQuery] = useState('');
+  const [showSpinner, setShowSpinner] = useState(true);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const result = await axios.get(`https://www.breakingbadapi.com/api/characters?name=${query}`);
+      setItems(result.data);
+      setShowSpinner(false);
+    }
+
+    fetchItems();
+  }, [query])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <SearchBox query={query} setQuery={setQuery} setShowSpinner={setShowSpinner} />
+     {showSpinner ? (<Spinner />) : <CharacterFlex items={items} />} 
     </div>
   );
-}
+};
 
 export default App;
